@@ -7,11 +7,15 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/RicardoLinck/simple-pool/server"
+
 	"golang.org/x/sync/errgroup"
 )
 
 func main() {
-	startServer()
+	apiConfig := server.NewAPIConfig(server.GenerateSampleItems())
+	apiConfig.StartServer()
+
 	numRequests := 30
 	results := make(chan *http.Response)
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
