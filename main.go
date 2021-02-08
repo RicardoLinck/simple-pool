@@ -14,7 +14,8 @@ import (
 
 func main() {
 	apiConfig := server.NewAPIConfig(server.GenerateSampleItems())
-	apiConfig.StartServer()
+	s := apiConfig.Init()
+	go http.ListenAndServe("localhost:3000", s)
 
 	numRequests := 30
 	results := make(chan *http.Response)

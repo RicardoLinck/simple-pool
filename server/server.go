@@ -54,7 +54,7 @@ func NewAPIConfig(items map[string][]Item) *APIConfig {
 	return &APIConfig{items: items, allItems: allItems}
 }
 
-func (a *APIConfig) StartServer() error {
+func (a *APIConfig) Init() http.Handler {
 	s := http.NewServeMux()
 	rand.New(rand.NewSource(time.Now().UnixNano()))
 	s.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
@@ -97,7 +97,7 @@ func (a *APIConfig) StartServer() error {
 		w.Write(response)
 	})
 
-	return http.ListenAndServe("localhost:3000", s)
+	return s
 }
 
 // Item - JSON schema
