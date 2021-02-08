@@ -19,7 +19,7 @@ type ItemResponseTest struct {
 	TotalItems int    `json:"total_items"`
 }
 
-func TestAPIConfig_StartServer(t *testing.T) {
+func TestAPIConfig_IntegrationTests(t *testing.T) {
 	apiConfig := NewAPIConfig(GenerateSampleItems())
 	s := httptest.NewServer(apiConfig.Init())
 	defer s.Close()
